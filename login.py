@@ -1,5 +1,5 @@
 from models import Users
-from flask import Blueprint, url_for, redirect, render_template, flash, session
+from flask import Blueprint, url_for, redirect, render_template, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, validators
 from app import db
@@ -22,7 +22,7 @@ def index():
         if login_user is not None:
             password = login_user.password
             if password is not None:
-                return redirect(url_for('tasks.board'))
+                return redirect(url_for('schedule.board'))
             else:
                 flash('wrong password!')
         else:
