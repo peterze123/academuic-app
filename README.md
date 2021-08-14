@@ -1,1 +1,1 @@
-# academuic-app
+# academic-app
