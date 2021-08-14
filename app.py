@@ -18,7 +18,10 @@ db = SQLAlchemy(app)
 import tasks
 app.register_blueprint(tasks.bp)
 
-app.add_url_rule('/', endpoint = 'tasks.board')
+import login
+app.register_blueprint(login.bp)
+
+app.add_url_rule('/', endpoint = 'login.index')
 
 #main
 if __name__== '__main__':

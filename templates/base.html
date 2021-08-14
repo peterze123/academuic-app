@@ -41,12 +41,11 @@
     {% endblock main %}
     </body>
     <script>
-        // uncomment after implementing the login functions
-        // $(document).ready(function(){
-        //     if (window.location.href.indexOf("your_board") == -1){
-        //         $("#create").hide();
-        //     }
-        // })
+        $(document).ready(function(){
+            if (window.location.href.indexOf("your_board") == -1){
+                $("#create").hide();
+            }
+        })
         $('#time-now').html(new Date().toLocaleTimeString('en-US',{
             hour12:true,
             hour:"numeric",

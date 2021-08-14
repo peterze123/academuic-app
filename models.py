@@ -1,12 +1,12 @@
 from app import db
 import os
 
-# # after implementing the login function
-# # user db, user_name, password
-# class Users(db.Model):
-#     id = db.Column(db.Integer, primary_key = True)
-#     user_name = db.Column(db.String(20), nullable = False, unique = True)
-#     password = db.Column(db.Integer, nullable = False)
+# user db, user_name, password
+class Users(db.Model):
+    __tablename__ = 'Users'
+    id = db.Column(db.Integer, primary_key = True)
+    user_name = db.Column(db.String(20), nullable = False, unique = True)
+    password = db.Column(db.Integer, nullable = False)
 
 # task db, content, time
 class Tasks(db.Model):
@@ -26,8 +26,22 @@ def init_db():
         pass
     else:
         open('data.db','a').close();
-
     db.drop_all()
     db.create_all()
+    
+    # push sample students
+    student = Users(id = 1, user_name = 'Abhishek', password = 12345)
+    db.session.add(student)
+    db.session.commit()
+
+    student = Users(id = 2, user_name = 'Shu', password = 12345)
+    db.session.add(student)
+    db.session.commit()
+
+
+    student = Users(id = 3, user_name = 'Peter', password = 12345)
+    db.session.add(student)
+    db.session.commit()
+
 
 init_db()
