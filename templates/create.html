@@ -23,9 +23,18 @@
         <p>{{form.zoom}}</p>
 
     </div>
-    <p id = 'btn'>{{form.submit}}</p>
+    <p id = 'btn'>{{form.submit(class_="btn")}}</p>
 
 </form>
+<style>
+    .btn{
+        border: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
 
+    .btn:hover{
+        box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+    }
+</style>
 {% endblock main %}
 </body>

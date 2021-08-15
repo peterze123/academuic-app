@@ -20,22 +20,68 @@
         {% if courses|length < 1 %}
             <div style="margin-bottom: 20px;">There are no registered courses. Register one below.</div>
         {% endif %}
-        <form action="/course/" method="POST">
-            <input type="text" name="course" id="course">
-            <input type="submit" value="Register Course">
+        <form id = "form" action="/course/" method="POST">
+            <div id = 'f' class="form-group">
+                <input class="form-control"type="text" name="course" id="course">
+                <input class="form-control" id = 'btn' type="submit" value="Register Course">
+            </div>
         </form>
     </div>
-    <div id='cards' class = 'card-columns' style = 'width: 65rem; margin: 3rem auto; float: none;'>
+    <div class = 'card-columns' style = 'width: 65rem; margin: 3rem auto; float: none;'>
         {% for course in courses %}
             <div class = 'card bg-secondary'>
-                <div class = 'card-body text-center bg-light' style="cursor: pointer;"   onclick="showSchedule('{{course.course_num}}')" >
+                <div id='cards' class = 'card-body text-center bg-light' style="cursor: pointer;"   onclick="showSchedule('{{course.course_num}}')" >
                     <h4 class = 'card-text'>CS {{ course.course_num }}</h4>
                     <p class = 'btn btn-block'>{{ course.name }}</p>
-                    <a href="/deletecourse/{{course.course_num}}">Delete Course</a>
+                    <a id = 'link' href="/deletecourse/{{course.course_num}}">Delete Course</a>
                 </div>
             </div>
         {% endfor %}
     </div>
 </div>
 
+<style>
+    #f{
+        display:inline-block;
+        text-align:center;
+    }
+    #course{
+        display: inline-block;
+        width: 40rem;
+    }
+    #btn{
+        display: inline-block;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        position: relative;
+        background-color:white;
+        border:none;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        width: 10rem;
+    }
+    #btn:hover{
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    #link{
+        color:black;
+        text-decoration:none;
+        padding: 6px;
+    }
+
+    #link:hover{
+        font-weight:bold;
+    }
+
+    .card{
+        box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
+        border: 0px;
+        transition-delay: 1000;
+    }
+
+    .card:hover{
+        box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+    }
+</style>
 {% endblock main %}

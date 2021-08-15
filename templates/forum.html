@@ -3,17 +3,17 @@
 {% block main %} 
 <div style="margin: 3rem auto; float: none; width: 65rem; text-align: center;">
     <form action="/forum/" method='POST'>
-        <input type="text" placeholder="Ask a question" id="question" name='question'>
-        <input type="submit" value='Submit'>
+        <input class = 'form-control' type="text" placeholder="Ask a question" id="question" name='question'>
+        <input class = 'btn' type="submit" value='Submit'>
     </form>     
     {% for question in questions %}
-        <div id="question_query" data-toggle="collapse" data-target="#answer_content-{{loop.index0}}">{{ question.query }}
+        <div id="question_query" data-toggle="collapse" data-target="#answer_content-{{loop.index0}}"><span class='ques'>{{ question.query }}</span>
             {% if question.answers|length > 0 %}
                 <span style="font-size: small; color: blue; font-style: italic; margin-left: 10px;">
                     {% if question.answers|length == 1 %}
-                    <span>1 answer</span>
+                    <span id = 'ans-c'>1 answer</span>
                     {% else %}
-                    <span>{{question.answers|length}} answers</span>
+                    <span id = 'ans-c'>{{question.answers|length}} answers</span>
                     {% endif %}
                 </span>
             {% endif %}
@@ -21,20 +21,22 @@
         {% if question.answers|length < 1 %}
             <div>No answers yet. Be the first to post one!</div>
             <form action="/forum/{{loop.index0}}" method='POST'>
-                <input type="text" placeholder="Enter an answer" id="answer" name='answer'>
-                <input type="submit" >
+                <input class = 'form-control' type="text" placeholder="Enter an answer" id="answer" name='answer'>
+                <input class = 'btn' type="submit" >
             </form>
         {% else %}
-            <div id="answer_content-{{loop.index0}}" class="collapse">
+            <div id="answer_content-{{loop.index0}}" class="collapse ans">
                 {% for answer in question.answers %}    
                     <div>By {{ answer.name }}</div>
                     <div>{{ answer.content }}</div>
                     <div>{{ answer.submittedon }}</div>
+                    <hr/>
                 {% endfor %}
                 <form action="/forum/{{loop.index0}}" method='POST'>
-                    <input type="text" placeholder="Enter an answer" id="answer" name='answer'>
-                    <input type="submit" >
+                    <input class = 'form-control' type="text" placeholder="Enter an answer" id="answer" name='answer'>
+                    <input class = 'btn' type="submit" >
                 </form>
+                <hr id='line'/>
             </div>
         {% endif %}
     {% endfor %}
@@ -52,7 +54,35 @@
             return $content.is(":visible") ? "Collapse" : "Expand";
         });
     });
-    })
+    });
 </script>
+
+<style>
+    .ques{
+        font-weight:bold;
+        font-size: 1.4rem;
+    }
+    .btn{
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        border: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:hover{
+        box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    #question_query, .ans{
+        font-size: 1.3rem;
+    }
+
+    #ans-c{
+        cursor: pointer
+    }
+    #line{
+        border:1px dashed black;
+    }
+</style>
 {% endblock main %}
 

@@ -7,25 +7,27 @@
     {{form.csrf_token()}}
 
     <div class="form-group">
-    <label class = "lab" for="exampleFormControlInput1">User Name:</label>
-    {{form.name}}
+    {{form.name(class_="in form-control", id="top",placeholder="  username")}}
     </div>
 
     <div class="form-group">
-    <label class = "lab" for="exampleInputPassword1">Password:</label>
-    {{form.password}}
+    {{form.password(class_="in form-control",id="pass", type="password", placeholder="  password")}}
     </div>
 
     {{form.submit(class_="btn")}}
 </form>
 </div>
 
+<script> 
+$(document).ready(function(){
+    $('#pass').type='password';
+});
+</script>
 <style>
     #main{
         width: 20rem;
         min-height: 5vh;
-        border: 1px solid black;
-        margin: 3rem auto 0 ;
+        margin: 1rem auto 0 ;
     }
 
     .lab{
@@ -41,13 +43,30 @@
         margin-left: 4rem;
         margin-bottom: 5rem;
         width: 5rem;
-        margin-top: 2rem;
-        border: 1px solid black;
+        margin-top: 1rem;
+        border: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:hover{
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
     }
 
     .photo{
         border: none;
         width: 700px;
+    }
+
+    .in{
+        width: 14rem;
+        margin-right: 5rem;
+        background-color: #eee;
+        border:none;
+        height: 2.5rem;
+    }
+
+    #top{
+        margin-top:2.5rem;
     }
 
 </style>
