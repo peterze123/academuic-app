@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block main %}      
+<h2 id = 'title'>{{name}}</h2>
+    <div id = "cards" class = 'card-columns' style = 'width: 65rem'>
+        {% for i in work %}
+            <div class = 'card bg-secondary'>
+                <div class = 'card-body text-center bg-light'>
+                    <h4 class = 'card-text'>{{i.name}}</h4>
+                    <p class = 'btn btn-block'>Due By {{ i.date }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+<style>
+    #title{
+        text-align: center;
+    }
+
+    #cards {
+        margin: 3rem auto;
+        float: none;
+    }
+
+</style>
+{% endblock main %}
+
+<script>
+    
+</script>

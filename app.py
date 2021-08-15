@@ -18,10 +18,12 @@ app.config.from_mapping(
 db = SQLAlchemy(app)
 
 # applying the blueprints
-import tasks
+import tasks, login, schedule
+app.register_blueprint(login.bp)
+app.register_blueprint(schedule.bp)
 app.register_blueprint(tasks.bp)
 
-app.add_url_rule('/', endpoint = 'tasks.board')
+app.add_url_rule('/', endpoint = 'login.index')
 
 #dummy courses registered bby students
 abhishek = [cs400]
