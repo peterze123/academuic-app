@@ -3,8 +3,10 @@
 {% block main %} 
 <div style="margin: 3rem auto; float: none; width: 65rem; text-align: center;">
     <form action="/forum/" method='POST'>
-        <input class = 'form-control' type="text" placeholder="Ask a question" id="question" name='question'>
-        <input class = 'btn' type="submit" value='Submit'>
+        <div style='display: flex; align-items: center;'>
+            <input class = 'form-control' style='flex: 1; margin-right: 10px;' type="text" placeholder="Ask a question" id="question" name='question'>
+            <input class = 'btn' type="submit" value='Submit'>
+        </div>
     </form>     
     {% for question in questions %}
         <div class='accordion'>
@@ -28,8 +30,10 @@
                 {% if question.answers|length < 1 %}
                 <div>No answers yet. Be the first to post one!</div>
                 <form action="/forum/{{loop.index0}}" method='POST'>
-                    <input class = 'form-control' type="text" placeholder="Enter an answer" id="answer" name='answer'>
-                    <input class = 'btn1' type="submit" >
+                    <div style='display: flex; align-items: center;'>
+                        <input class = 'form-control' style='flex: 1; margin-right: 10px;' type="text" placeholder="Enter an answer" id="answer" name='answer'>
+                        <input class = 'btn' type="submit" >
+                    </div>
                 </form>
             {% else %}
                 <div id="answer_content-{{loop.index0}}" class="collapse ans" style="font-size: 1rem;">
