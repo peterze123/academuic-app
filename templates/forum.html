@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block main %} 
+<div style="margin: 3rem auto; float: none; width: 65rem; text-align: center;">
+    <form action="/forum/" method='POST'>
+        <input type="text" placeholder="Ask a question" id="question" name='question'>
+        <input type="submit" value='Submit'>
+    </form>     
+    {% for question in questions %}
+        <div id="question_query" data-toggle="collapse" data-target="#answer_content-{{loop.index0}}">{{ question.query }}</div>
+        {% if question.answers|length < 1 %}
+            <div>No answers yet. Be the first to post one!</div>
+            <form action="/forum/{{loop.index0}}" method='POST'>
+                <input type="text" placeholder="Enter an answer" id="answer" name='answer'>
+                <input type="submit" >
+            </form>
+        {% else %}
+            <div id="answer_content-{{loop.index0}}" class="collapse">
+                {% for answer in question.answers %}    
+                    <div>By {{ answer.name }}</div>
+                    <div>{{ answer.content }}</div>
+                    <div>{{ answer.submittedon }}</div>
+                {% endfor %}
+                <form action="/forum/{{loop.index0}}" method='POST'>
+                    <input type="text" placeholder="Enter an answer" id="answer" name='answer'>
+                    <input type="submit" >
+                </form>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<script>
+    $("#question_header").click(() => {
+        $header = $(this);
+        $content = $("#answer_content");
+        $content.slideToggle(500, function () {
+        //execute this after slideToggle is done
+        //change text of header based on visibility of content div
+        $header.text(function () {
+            //change text based on condition
+            return $content.is(":visible") ? "Collapse" : "Expand";
+        });
+    });
+    })
+</script>
+{% endblock main %}
+

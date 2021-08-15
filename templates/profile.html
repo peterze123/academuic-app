@@ -1,22 +1,41 @@
 {% extends "base.html" %}
+
 {% block main %}      
+<div style="width: 100%; text-align: center; margin: 10px 0; font-size: 30px;">
+    Abhishek Shrinivasan
+</div>
+<script type="text/javascript">
+    function showSchedule(name){
+        // console.log('EVENT', event);
+        console.log('name', name);
+        // console.log('THIS', this);
+        if (event.target.tagName === 'A') return;
+        var link = document.createElement('a');
+        link.href = "{{url_for('schedule.board', course='name')}}".replace('name', name);
+        link.click();
+    }
+</script>
+<div style="margin: 0 30px;">
+    <div style="font-size: 20px; width: 100%; text-align: center; margin: 20px;">
+        {% if courses|length < 1 %}
+            <div style="margin-bottom: 20px;">There are no registered courses. Register one below.</div>
+        {% endif %}
+        <form action="/course/" method="POST">
+            <input type="text" name="course" id="course">
+            <input type="submit" value="Register Course">
+        </form>
+    </div>
+    <div id='cards' class = 'card-columns' style = 'width: 65rem; margin: 3rem auto; float: none;'>
+        {% for course in courses %}
+            <div class = 'card bg-secondary'>
+                <div class = 'card-body text-center bg-light' style="cursor: pointer;"   onclick="showSchedule('{{course.course_num}}')" >
+                    <h4 class = 'card-text'>CS {{ course.course_num }}</h4>
+                    <p class = 'btn btn-block'>{{ course.name }}</p>
+                    <a href="/deletecourse/{{course.course_num}}">Delete Course</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 
-<h1>{{ person.name }}</h1>
-
-<table>
-    <tr>
-        <th>Course Number</th>
-        <th>Name</th>
-    </tr>
-    {% for course in courses %}
-        <tr>
-            <td>{{ course.course_num }}</td>
-            <td> {{ course.name }} </td>
-        </tr>
-    {% endfor %}
-    <form action="/" method="POST">
-        <input type="text" name="course" id="course">
-        <input type="submit" value="Register Course">
-    </form>
-</table>
 {% endblock main %}

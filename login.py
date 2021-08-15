@@ -23,7 +23,7 @@ def index():
             password = login_user.password
             if password is not None:
                 session['id'] = login_user.id;
-                return redirect(url_for('schedule.board'))
+                return redirect(url_for('course.show_courses'))
             else:
                 flash('wrong password!')
         else:

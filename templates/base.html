@@ -13,12 +13,17 @@
         <nav class='navbar navbar-expand-lg navbar-light bg-light'>
             <div class = 'container-fluid'>
                 <div class = 'navbar-header'>
-                    <a class = 'navbar-brand'>
-                        <span class = 'nav-link' id = 'time-now'></span>
+                    <a class = 'navbar-item' style='display: inline-block;'>
+                        <span class = 'nav-link' id = 'back' style='cursor: pointer; padding-left: 0; margin-left: -20px; margin-right: 20px;'>&laquo; Back</span>
                     </a>
+                    <a class = 'navbar-brand'>
+                        <span class = 'nav-link' id = 'time-now' style='padding-left: 0;'></span>
+                    </a>
+                    <!-- <li class = 'nav-item'><a id = 'back' class='nav-link'>Back</a></li> -->
                 </div>
                 <ul id = 'nav-container' class = 'navbar-nav'>
                     <li class = 'nav-item'><a id = 'login' href = " {{url_for('login.index')}}" class='nav-link'>Login</a></li>
+                    <li class = 'nav-item'><a id = 'forum' href = " {{url_for('forum.forum')}} " class='nav-link' style='display: none;'>Forum</a></li>
                     <li class = 'nav-item'><a id = 'signup' href = "#" class='nav-link'>Signup</a></li>
                     <li class = 'nav-item'><a id = 'session' href = "{{url_for('tasks.board')}}" class='nav-link'>Study Session</a></li>
                     <li class = 'nav-item'><a id = 'create' href = "{{url_for('tasks.create')}}" class='nav-link'>Create</a></li>
@@ -47,6 +52,8 @@
     <script>
         $("#create").hide();
         $('#schedule').hide();
+        $('#forum').hide();
+        $('#back').hide();
         $(document).ready(function(){
             if (window.location.href.indexOf("board") > 0){
                 $("#create").show();
@@ -60,12 +67,18 @@
             if (window.location.href.indexOf("board") > 0 || window.location.href.indexOf("create") > 0){
                 $("#schedule").show();
             }
+            if (window.location.href.indexOf('/course/') > 0) $('#forum').show();
+            if (window.location.href.length > 22) $('#back').show();
+            $('#back').click(() => {
+                window.history.back();
+            })
         })
         $('#time-now').html(new Date().toLocaleTimeString('en-US',{
             hour12:true,
             hour:"numeric",
             minute:"numeric",
         }));
+
     </script>
 
 </html>
