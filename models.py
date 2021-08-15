@@ -8,6 +8,7 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     user_name = db.Column(db.String(20), nullable = False, unique = True)
     password = db.Column(db.Integer, nullable = False)
+    name = db.Column(db.String(20), nullable=False, unique=True)
 
 # task db, content, time, for study session
 class Tasks(db.Model):
@@ -42,13 +43,13 @@ def init_db():
     db.create_all()
 
     # push sample students
-    student = Users(id = 1, user_name = 'Abhishek', password = 12345)
+    student = Users(id = 1, user_name = 'Abhishek', password = 12345, name='Abhishek Shrinivasan')
     db.session.add(student)
 
-    student = Users(id = 2, user_name = 'Shu', password = 12345)
+    student = Users(id = 2, user_name = 'Shu', password = 12345, name='Shu Gao')
     db.session.add(student)
 
-    student = Users(id = 3, user_name = 'Peter', password = 12345)
+    student = Users(id = 3, user_name = 'Peter', password = 12345, name='Peter Ze')
     db.session.add(student)
 
     #push sample schedule

@@ -1,5 +1,6 @@
 from flask import Blueprint, redirect, render_template, url_for, flash, session, request
 from courses import cs400, cs570, cs999
+from models import Users
 
 
 bp = Blueprint('course', __name__)
@@ -16,7 +17,9 @@ def show_courses():
         abhishek.append(course)
         return redirect(url_for("course.show_courses"))
     else:
-        return render_template('profile.html', courses=abhishek)
+        login_id = session['id']
+        user = Users.query.get(int(login_id))
+        return render_template('profile.html', courses=abhishek, user=user)
 
 @bp.route('/deletecourse/<int:course_num>')
 def delete_course(course_num: int):
