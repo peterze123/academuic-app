@@ -15,10 +15,10 @@ app.config.from_mapping(
 db = SQLAlchemy(app)
 
 # applying the blueprints
-import login, schedule
+import tasks, login, schedule
 app.register_blueprint(login.bp)
 app.register_blueprint(schedule.bp)
-
+app.register_blueprint(tasks.bp)
 
 app.add_url_rule('/', endpoint = 'login.index')
 

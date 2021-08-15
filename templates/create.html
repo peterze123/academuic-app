@@ -7,10 +7,21 @@
 <form action = "{{url_for('tasks.create')}}" method = "post" style = 'width:400px; margin:0 auto;'>
     {{form.csrf_token()}}
     <div class = 'form-group'>
+        <label for = 'exmpleFormControlTextarea'><h4>Title</h4></label>
+        <p>{{form.title}}</p>
         <label for = 'exmpleFormControlTextarea'><h4>{{form.task.label}}</h4></label>
         <p>{{form.task}}</p>
-        <label for = 'exmpleFormControlTextarea'><h4>Finish By</h4></label>
+        <label for = 'exmpleFormControlTextarea'><h4>Date</h4></label>
+        <p>{{form.date}}</p>
+        <label for = 'exmpleFormControlTextarea'><h4>Time</h4></label>
         <p>{{form.time}}</p>
+        <label for = 'exmpleFormControlTextarea'><h4>Study Hours</h4></label>
+        <p>{{form.hours}}</p>
+        <label for = 'exmpleFormControlTextarea'><h4>Number of Study Mates</h4></label>
+        <p>{{form.persons}}</p>
+        <label for = 'exmpleFormControlTextarea'><h4>Zoom Link</h4></label>
+        <p>{{form.zoom}}</p>
+
     </div>
     <p id = 'btn'>{{form.submit}}</p>
 

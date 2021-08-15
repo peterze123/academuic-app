@@ -16,9 +16,12 @@ class Tasks(db.Model):
     name = db.Column(db.String(20), nullable = False)
     content = db.Column(db.String(200), nullable = False)
     time = db.Column(db.String(), nullable = False)
+    date = db.Column(db.String(), nullable = False)
+    title = db.Column(db.String(100), nullable = False)
+    zoom=db.Column(db.String(150), nullable = False)
+    numPersons=db.Column(db.Integer, primary_key=False)
+    numHours=db.Column(db.Integer, primary_key=False)
     
-    def __repr__(self):
-        return f'{self.content} to be completed on {self.time}'
 
 # courses db
 class Schedule(db.Model):
