@@ -18,6 +18,7 @@
                     </a>
                     <a class = 'navbar-brand'>
                         <span class = 'nav-link' id = 'time-now' style='padding-left: 0;'></span>
+                        <a id = 'icon' href = '#' class ='nav-brand'><img class="d-inline-block align-top" id = 'img' src="/static/collegememes-lede.svg"></a></li>
                     </a>
                     <!-- <li class = 'nav-item'><a id = 'back' class='nav-link'>Back</a></li> -->
                 </div>
@@ -27,7 +28,6 @@
                     <li class = 'nav-item'><a id = 'signup' href = "#" class='nav-link'>Signup</a></li>
                     <li class = 'nav-item'><a id = 'session' href = "{{url_for('tasks.board')}}" class='nav-link'>Study Session</a></li>
                     <li class = 'nav-item'><a id = 'create' href = "{{url_for('tasks.create')}}" class='nav-link'>Create</a></li>
-                    <li class = 'nav-item'><a id = 'schedule' href = "{{url_for('schedule.board')}}" class='nav-link'>Schedule</a></li>
                 </ul>
             </nav>
             </div>
@@ -50,35 +50,32 @@
     {% endblock main %}
     </body>
     <script>
-        $("#create").hide();
-        $('#schedule').hide();
-        $('#forum').hide();
-        $('#back').hide();
-        $(document).ready(function(){
-            if (window.location.href.indexOf("board") > 0){
-                $("#create").show();
-            }
-            if (window.location.href.indexOf("schedule") == -1){
-                $("#session").hide();
-            }            
-            if (window.location.href.indexOf("login") == -1){
-                $("#signup").hide();
-            }
-            if (window.location.href.indexOf("board") > 0 || window.location.href.indexOf("create") > 0){
-                $("#schedule").show();
-            }
-            if (window.location.href.indexOf('/course/') > 0) $('#forum').show();
-            if (window.location.href.length > 22) $('#back').show();
-            $('#back').click(() => {
-                window.history.back();
-            })
-        })
-        $('#time-now').html(new Date().toLocaleTimeString('en-US',{
-            hour12:true,
-            hour:"numeric",
-            minute:"numeric",
-        }));
-
+$("#create").hide();
+$('#forum').hide();
+$('#back').hide();
+$("#signup").hide();
+var p = window.location.pathname;   
+$(document).ready(function(){
+    if (p.indexOf("board") > 0){
+        $("#create").show();
+    }
+    if (p.indexOf("schedule") == -1){
+        $("#session").hide();
+    }
+    if (p.indexOf("login") > 0 || (p.length === 0 || p === "/" || p.match(/^\/?index/)) ){
+        $("#signup").show();
+    }
+    if (window.location.href.indexOf('/course/') > 0) $('#forum').show();
+    if (window.location.href.length > 22) $('#back').show();
+    $('#back').click(() => {
+        window.history.back();
+    })
+})
+$('#time-now').html(new Date().toLocaleTimeString('en-US',{
+    hour12:true,
+    hour:"numeric",
+    minute:"numeric",
+}));
     </script>
 
     <style>
@@ -90,6 +87,21 @@
             cursor: pointer;
             color: rgb(126, 123, 123);
             font-weight: bold;
+        }
+        #img{
+            position:absolute;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            text-align: center;
+            margin-top: -2rem;
+            padding-top: 2rem;
+            width: 10rem;
+            height: 6rem;
+            /* text-align: center; */
+            /* margin-left: 26rem; */
         }
     </style>
 
