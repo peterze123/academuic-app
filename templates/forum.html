@@ -7,7 +7,17 @@
         <input type="submit" value='Submit'>
     </form>     
     {% for question in questions %}
-        <div id="question_query" data-toggle="collapse" data-target="#answer_content-{{loop.index0}}">{{ question.query }}</div>
+        <div id="question_query" data-toggle="collapse" data-target="#answer_content-{{loop.index0}}">{{ question.query }}
+            {% if question.answers|length > 0 %}
+                <span style="font-size: small; color: blue; font-style: italic; margin-left: 10px;">
+                    {% if question.answers|length == 1 %}
+                    <span>1 answer</span>
+                    {% else %}
+                    <span>{{question.answers|length}} answers</span>
+                    {% endif %}
+                </span>
+            {% endif %}
+        </div>
         {% if question.answers|length < 1 %}
             <div>No answers yet. Be the first to post one!</div>
             <form action="/forum/{{loop.index0}}" method='POST'>
