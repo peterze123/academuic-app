@@ -1,5 +1,8 @@
-from flask import Flask
+from flask import Flask, request
+from flask.templating import render_template
+from werkzeug.utils import redirect
 from flask_sqlalchemy import SQLAlchemy
+from courses import Course, Schedule, cs400, cs570, cs999
 
 # initializes the appp
 app = Flask(__name__, instance_relative_config = True)
@@ -19,6 +22,21 @@ import tasks
 app.register_blueprint(tasks.bp)
 
 app.add_url_rule('/', endpoint = 'tasks.board')
+
+#dummy courses registered bby students
+abhishek = [cs400]
+course_dict = {'cs400': cs400, 'cs570': cs570, 'cs999': cs999}
+
+@app.route('/course/', methods=['GET', 'POST'])
+def show_courses():
+    if request.method == 'POST':
+        course_name: str = request.form['course']
+        course = course_dict[course_name.lower()]
+        abhishek.append(course)
+        return redirect('/course/')
+    else:
+        return render_template('profile.html', courses=abhishek)
+
 
 #main
 if __name__== '__main__':
