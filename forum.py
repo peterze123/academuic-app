@@ -1,4 +1,5 @@
 from datetime import datetime
+from models import Users
 from flask import Blueprint, redirect, render_template, url_for, flash, session, request
 from questions import q1, Question, Answer
 
@@ -26,6 +27,12 @@ def forum(ansid:int = None):
             q: Question = qs[ansid]
             print(request.form)
             content = request.form['answer']
-            ans = Answer('Abhishek', 1, content, submittedon=datetime.now())
+            user = get_user()
+            ans = Answer(user.name, user.id, content, submittedon=datetime.now())
             q.add_answer(ans)
         return redirect('/forum')
+
+def get_user():
+    userid = session['id']
+    user = Users.query.get(int(userid))
+    return user
