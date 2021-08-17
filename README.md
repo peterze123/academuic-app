@@ -1,2 +1,2 @@
 # Sbuddy
--https://youtu.be/b39OWTtEwTc
+- https://youtu.be/b39OWTtEwTc
