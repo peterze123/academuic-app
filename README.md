@@ -1,2 +1,2 @@
-# academic-app
-- Have created a minimal to-do list app
+# Sbuddy
+-https://youtu.be/b39OWTtEwTc
